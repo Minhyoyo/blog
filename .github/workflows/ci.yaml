@@ -23,9 +23,9 @@ jobs:
       - name: Build Docker image
         run: |
           docker build -t $IMAGE_NAME:latest -f Dockerfile .
-          docker tag $IMAGE_NAME:latest $IMAGE_NAME:v1
+          docker tag $IMAGE_NAME:latest $IMAGE_NAME:v2
 
       - name: Push Docker image
         run: |
           docker push $IMAGE_NAME:latest
-          docker push $IMAGE_NAME:v1
+          docker push $IMAGE_NAME:v2
