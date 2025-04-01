@@ -1,0 +1,31 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  IMAGE_NAME: "fine-quail-balanced.ngrok-free.app/minhyoyo/blog-app"
+
+jobs:
+  build-and-push:
+    name: "Build & Push Docker Image to Harbor"
+    runs-on: ubuntu-latest
+
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Log in to Harbor
+      uses: echo "${{ secrets.HARBOR_PASSWORD }}" | docker login fine-quail-balanced.ngrok-free.app -u "${{ secrets.HARBOR_USERNAME }}" --password-stdin
+
+    - name: Build Docker image
+      run: |
+        docker build -t $IMAGE_NAME:latest -f Dockerfile .
+        docker tag $IMAGE_NAME:latest $IMAGE_NAME:v1
+
+    - name: Push Docker image
+      run: |
+        docker push $IMAGE_NAME:latest
+        docker push $IMAGE_NAME:v1
