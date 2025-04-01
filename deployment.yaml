@@ -29,6 +29,7 @@ metadata:
   name: blog-service
   namespace: blog
 spec:
+  type: LoadBalancer
   selector:
     app: blog-app
   ports:
