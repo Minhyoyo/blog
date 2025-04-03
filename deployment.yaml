@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: blog-app
-        image: fine-quail-balanced.ngrok-free.app/minhyoyo/blog-app:v2
+        image: fine-quail-balanced.ngrok-free.app/minhyoyo/blog-app:v3
         resources:
           limits:
             memory: "128Mi"
